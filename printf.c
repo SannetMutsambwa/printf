@@ -1,4 +1,10 @@
 #include "main.h"
+/**
+* _printf - Custom printf function
+* @format: Format string containing format specifiers
+* Description: This function prints formatted output to stdout.
+* Return: Number of characters printed (excluding null byte)
+*/
 int _printf(const char *format, ...)
 {
 int char_print = 0;
@@ -10,9 +16,7 @@ while (*format)
 {
 if (*format != '%')
 {
-char temp[2];
-temp[0] = *format;
-temp[1] = '\0';
+char temp[2] = {*format, '\0'};
 fputs(temp, stdout);
 char_print++;
 }
@@ -25,8 +29,7 @@ if (*format == 'c')
 {
 char c = va_arg(list_of_args, int);
 char *temp = (char *)malloc(2);
-temp[0] = c;
-temp[1] = '\0';
+temp[0] = {c, '\0'};
 fputs(temp, stdout);
 free(temp);
 char_print++;
