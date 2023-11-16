@@ -16,7 +16,9 @@ while (*format)
 {
 if (*format != '%')
 {
-char temp[2] = {*format, '\0'};
+char temp[2];
+temp[0] = *format;
+temp[1] = '\0';
 fputs(temp, stdout);
 char_print++;
 }
@@ -28,10 +30,10 @@ break;
 if (*format == 'c')
 {
 char c = va_arg(list_of_args, int);
-char *temp = (char *)malloc(2);
-temp[0] = {c, '\0'};
+char temp[2];
+temp[0] = c;
+temp [1] = '\0';
 fputs(temp, stdout);
-free(temp);
 char_print++;
 }
 else if (*format == 's')
