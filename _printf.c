@@ -7,43 +7,45 @@
 * Return: Number of characters printed
 * Define a function named _printf with *char and variable argumentds
 * The _printf function mimics the brhaviour of a standard printf function.
-* Takes a string and variable as input
-* return: '%', 's' or 'c' if successful
 */
 int _printf(const char *format, ...)
 {
-int counter = 0;
+int char_print = 0;
 va_list args;
 va_start(args, format);
-while (*format != '\0')
+if (format == NULL)
 {
-if (*format == '%')
-{
-printf("%%");
-counter = counter + 1;
+return (-1);
 }
-else if (*format == 'c')
 {
-int character = va_arg(args, int);
+if (*format != '%')
+{
+printf("%s", format);
+char_print = char_print + 1;
+}
+if (*format == 'c')
+{
+char character = (char)va_arg(args, int);
 printf("%c", character);
-counter = counter + 1;
+char_print = char_print + 1;
 }
 else if (*format == 's')
 {
 char *string = va_arg(args, char*);
-while (*string)
-{
-printf("%c", *string);
+printf("%s", string);
 string = string + 1;
-counter = counter + 1;
+char_print = char_print + 1;
 }
+if (*format == '%')
+{
+printf("%%");
+char_print = char_print + 1;
 }
 else
 {
-counter += printf("%c", *format);
-}
-format = format + 1;
-}
+char_print += _printf("%c", *format);
 va_end(args);
+}
 return (0);
+}
 }
